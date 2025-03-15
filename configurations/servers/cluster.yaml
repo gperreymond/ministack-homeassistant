@@ -5,9 +5,9 @@ plugins:
   # simulate external loadbalancer
   - 'plugins/traefik.yaml'
   # # simulate external bucket s3
-  # - 'plugins/minio-single.yaml'
+  - 'plugins/minio-single.yaml'
   # # simulate external rds postgres 
-  # - 'plugins/postgres.yaml'
+  - 'plugins/postgres.yaml'
 
 services:
   nomad:

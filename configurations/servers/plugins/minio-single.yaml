@@ -5,14 +5,14 @@ services:
     command: 'server --console-address ":9001"'
     environment:
       MINIO_CONFIG_ENV_FILE: '/etc/config.env'
-      MINIO_BROWSER_REDIRECT_URL: 'http://minio-webui.docker.localhost'
+      MINIO_BROWSER_REDIRECT_URL: 'http://minio-webui.homeassistant.internal'
     labels:
       - 'traefik.enable=true'
-      - 'traefik.http.routers.minio-webui.rule=Host(`minio-webui.docker.localhost`)'
+      - 'traefik.http.routers.minio-webui.rule=Host(`minio-webui.homeassistant.internal`)'
       - 'traefik.http.routers.minio-webui.entrypoints=web'
       - 'traefik.http.routers.minio-webui.service=minio-webui'
       - 'traefik.http.services.minio-webui.loadbalancer.server.port=9001'
-      - 'traefik.http.routers.minio.rule=Host(`s3.docker.localhost`)'
+      - 'traefik.http.routers.minio.rule=Host(`s3.homeassistant.internal`)'
       - 'traefik.http.routers.minio.entrypoints=web'
       - 'traefik.http.routers.minio.service=minio'
       - 'traefik.http.services.minio.loadbalancer.server.port=9000'
