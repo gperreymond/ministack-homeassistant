@@ -1,5 +1,5 @@
 name: 'homeassistant'
-datacenter: 'perreymond-sigean'
+datacenter: 'europe-paris'
 
 plugins:
   # simulate external loadbalancer
