@@ -1,0 +1,37 @@
+name: 'homeassistant'
+datacenter: 'perreymond-sigean'
+
+plugins:
+  # simulate external loadbalancer
+  - 'plugins/traefik.yaml'
+  # # simulate external bucket s3
+  # - 'plugins/minio-single.yaml'
+  # # simulate external rds postgres 
+  # - 'plugins/postgres.yaml'
+
+services:
+  nomad:
+    enabled: true
+    version: '1.9.7'
+    config:
+      server:
+        bootstrap_expect: 3
+        labels:
+          - 'traefik.enable=true'
+          - 'traefik.http.routers.nomad.rule=Host(`homeassistant.home`) && PathPrefix(`/nomad`)'
+          - 'traefik.http.routers.nomad.entrypoints=web'
+          - 'traefik.http.services.nomad.loadbalancer.server.port=4646'
+    servers:
+      - name: 'nomad-server-1'
+      - name: 'nomad-server-2'
+      - name: 'nomad-server-3'
+    # clients:
+    #   - name: monitoring-system
+    #     local_volumes:
+    #       - 'prometheus/rules:/mnt/prometheus/rules'
+    #       - 'prometheus/scrape_configs:/mnt/prometheus/scrape_configs'
+    #     docker_volumes:
+    #       - 'prometheus_data'
+    #       - 'thanos_store_data'
+    #       - 'thanos_compactor_data'
+    #   - name: worker-homeassistant

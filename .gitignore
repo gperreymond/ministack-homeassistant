@@ -1,0 +1,7 @@
+.ministack
+
+.terragrunt-cache
+.terraform
+.terraform.lock.hcl
+
+configurations/clients
