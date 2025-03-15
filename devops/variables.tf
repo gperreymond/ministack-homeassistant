@@ -8,7 +8,7 @@ variable "root_path" {
 
 variable "provider_nomad_host" {
   type    = string
-  default = "nomad.homeassistant.internal"
+  default = "http://nomad.homeassistant.internal"
 }
 
 #-------------------------------
