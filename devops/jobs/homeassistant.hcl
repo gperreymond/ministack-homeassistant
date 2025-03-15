@@ -1,11 +1,11 @@
 job "homeassistant" {
   datacenters = ["europe-paris"]
-  namespace   = "${destination}"
+  namespace   = "homeassistant-system"
   type        = "service"
 
   constraint {
     attribute = "$${attr.unique.hostname}"
-    value     = "worker-${destination}"
+    value     = "europe-paris-${destination}"
   }
 
   group "homeassistant" {
@@ -23,7 +23,7 @@ job "homeassistant" {
       user   = "root"
 
       config {
-        image      = "homeassistant/home-assistant:${ghomeassistant_docker_tag}"
+        image      = "homeassistant/home-assistant:${homeassistant_docker_tag}"
         privileged = true
         ports      = ["homeassistant-http"]
         volumes = [
@@ -53,14 +53,14 @@ EOF
         port     = "homeassistant-http"
         check {
           type     = "http"
-          path     = "/api/health"
+          path     = "/"
           interval = "10s"
           timeout  = "2s"
         }
         tags = [
           "metrics", "monitoring",
           "traefik.enable=true",
-          "traefik.http.routers.homeassistant.rule=Host(`homeassistant.docker.localhost`)",
+          "traefik.http.routers.homeassistant.rule=Host(`homeassistant.internal`)",
           "traefik.http.routers.homeassistant.entrypoints=web",
           "traefik.http.services.homeassistant.loadbalancer.passhostheader=true",
         ]
