@@ -1,14 +1,12 @@
 services:
 
   mdns_repeater:
-    image: 'jdbeeler/mdns-repeater:latest'
+    image: 'jdelker/mdns-repeater:latest'
     container_name: 'mdns-repeater'
     network_mode: 'host'
     privileged: true
     environment:
-    - 'USE_MDNS_REPEATER=1'
-    - 'EXTERNAL_INTERFACE=wlp0s20f3'
-    - 'DOCKER_NETWORK_NAME=ministack'
-    - 'OPTIONS=-v'
+    - 'INTERFACES=wlp0s20f3'
+    - 'DOCKER_NETWORKS=ministack'
     volumes:
       - '/var/run/docker.sock:/var/run/docker.sock'
