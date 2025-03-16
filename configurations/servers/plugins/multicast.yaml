@@ -1,7 +1,7 @@
 services:
 
   mdns_repeater:
-    image: 'jdelker/mdns-repeater:latest'
+    image: 'ghcr.io/jdelker/docker-mdns-repeater:master'
     container_name: 'mdns-repeater'
     network_mode: 'host'
     privileged: true
