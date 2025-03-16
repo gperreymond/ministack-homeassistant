@@ -9,5 +9,6 @@ services:
     - 'USE_MDNS_REPEATER=1'
     - 'EXTERNAL_INTERFACE=wlp0s20f3'
     - 'DOCKER_NETWORK_NAME=ministack'
+    - 'OPTIONS=-v'
     volumes:
       - '/var/run/docker.sock:/var/run/docker.sock'
