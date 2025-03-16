@@ -12,7 +12,7 @@ job "homeassistant" {
     count = 1
 
     network {
-      mode = "bridge"
+      mode = "host"
       port "homeassistant-http" {
         to = 8123
       }
@@ -30,7 +30,7 @@ job "homeassistant" {
           "/mnt/homeassistant_config_data:/config",
         ]
         extra_hosts = [
-          "rds-postgres.docker.localhost:10.1.0.2",
+          "rds-postgres.homeassistant.internal:10.1.0.2",
         ]
       }
 
@@ -58,7 +58,6 @@ EOF
           timeout  = "2s"
         }
         tags = [
-          "metrics", "monitoring",
           "traefik.enable=true",
           "traefik.http.routers.homeassistant.rule=Host(`homeassistant.internal`)",
           "traefik.http.routers.homeassistant.entrypoints=web",
