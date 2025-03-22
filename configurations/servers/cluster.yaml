@@ -28,15 +28,14 @@ services:
       - name: 'nomad-server-2'
       - name: 'nomad-server-3'
     clients:
-      - name: worker-homeassistant
+      - name: 'worker-homeassistant'
         docker_volumes:
           - 'homeassistant_config_data'
-
-    #   - name: monitoring-system
-    #     local_volumes:
-    #       - 'prometheus/rules:/mnt/prometheus/rules'
-    #       - 'prometheus/scrape_configs:/mnt/prometheus/scrape_configs'
-    #     docker_volumes:
-    #       - 'prometheus_data'
-    #       - 'thanos_store_data'
-    #       - 'thanos_compactor_data'
+      - name: 'worker-monitoring'
+        local_volumes:
+          - 'prometheus/rules:/mnt/prometheus/rules'
+          - 'prometheus/scrape_configs:/mnt/prometheus/scrape_configs'
+        docker_volumes:
+          - 'prometheus_data'
+          - 'thanos_store_data'
+          - 'thanos_compactor_data'

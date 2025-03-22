@@ -14,7 +14,7 @@ job "homeassistant" {
     network {
       mode = "host"
       port "homeassistant-http" {
-        to = 8123
+        static = 8123
       }
     }
 
@@ -23,9 +23,10 @@ job "homeassistant" {
       user   = "root"
 
       config {
-        image      = "homeassistant/home-assistant:${homeassistant_docker_tag}"
-        privileged = true
-        ports      = ["homeassistant-http"]
+        image        = "homeassistant/home-assistant:${homeassistant_docker_tag}"
+        privileged   = true
+        network_mode = "host"
+        ports        = ["homeassistant-http"]
         volumes = [
           "/mnt/homeassistant_config_data:/config",
         ]

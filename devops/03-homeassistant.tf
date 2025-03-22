@@ -33,3 +33,14 @@ resource "nomad_job" "homeassistant" {
     nomad_variable.homeassistant_postgres_configuration,
   ]
 }
+
+resource "null_resource" "homeassistant" {
+  depends_on = [
+    // parent
+    null_resource.postgres,
+    // resources: homeassistant
+    nomad_namespace.homeassistant_system,
+    nomad_variable.homeassistant_postgres_configuration,
+    nomad_job.homeassistant,
+  ]
+}
