@@ -6,7 +6,7 @@ services:
     network_mode: 'host'
     privileged: true
     environment:
-    - 'INTERFACES=wlp0s20f3'
-    - 'DOCKER_NETWORKS=ministack'
+      INTERFACES: 'wlp0s20f3'
+      DOCKER_NETWORKS: 'ministack'
     volumes:
       - '/var/run/docker.sock:/var/run/docker.sock'

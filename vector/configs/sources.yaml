@@ -1,0 +1,8 @@
+sources:
+
+  prometheus_scrape_homeassistant:
+    type: 'prometheus_scrape'
+    endpoints:
+    - 'http://homeassistant.internal/api/prometheus'
+    scrape_interval_secs: 30
+    scrape_timeout_secs: 5

@@ -1,0 +1,29 @@
+sinks:
+
+  prometheus_exporter:
+    type: 'prometheus_exporter'
+    inputs:
+    - 'remap_swimming_pool_orp'
+    - 'remap_swimming_pool_ph'
+    - 'remap_swimming_pool_temperature'
+    - 'remap_weather_temperature'
+    - 'remap_weather_humidity'
+    address: '0.0.0.0:9598'
+
+  prometheus_remote_write:
+    type: 'prometheus_remote_write'
+    inputs:
+    - 'remap_swimming_pool_orp'
+    - 'remap_swimming_pool_ph'
+    - 'remap_swimming_pool_temperature'
+    - 'remap_weather_temperature'
+    - 'remap_weather_humidity'
+    endpoint: 'http://prometheus.homeassistant.internal/api/v1/write'
+
+  console:
+    type: 'console'
+    inputs:
+    - 'prometheus_scrape_homeassistant'
+    encoding:
+      codec: 'json'
+    

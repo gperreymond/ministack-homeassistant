@@ -1,0 +1,31 @@
+transforms:
+
+  filter_weather_temperature:
+    type: 'filter'
+    inputs:
+    - 'prometheus_scrape_homeassistant'
+    condition: '.name=="hass_sensor_unit_celsius" && .tags.friendly_name=="weather_forecast_temperature"'
+  remap_weather_temperature:
+    type: 'remap'
+    inputs:
+    - 'filter_weather_temperature'
+    source: |-
+      .name = "homeassistant_weather_temperature"
+      del(.tags.domain)
+      del(.tags.entity)
+      del(.tags.friendly_name)
+
+  filter_weather_humidity:
+    type: 'filter'
+    inputs:
+    - 'prometheus_scrape_homeassistant'
+    condition: '.name=="hass_sensor_unit_percent" && .tags.friendly_name=="weather_forecast_humidity"'
+  remap_weather_humidity:
+    type: 'remap'
+    inputs:
+    - 'filter_weather_humidity'
+    source: |-
+      .name = "homeassistant_weather_humidity"
+      del(.tags.domain)
+      del(.tags.entity)
+      del(.tags.friendly_name)

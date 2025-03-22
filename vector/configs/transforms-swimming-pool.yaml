@@ -1,0 +1,48 @@
+transforms:
+
+  filter_swimming_pool_orp:
+    type: 'filter'
+    inputs:
+    - 'prometheus_scrape_homeassistant'
+    condition: '.name=="hass_sensor_unit_mv" && .tags.friendly_name=="orp_iopool_pool"'
+  remap_swimming_pool_orp:
+    type: 'remap'
+    inputs:
+    - 'filter_swimming_pool_orp'
+    source: |-
+      .name = "homeassistant_swimming_pool_orp"
+      del(.tags.domain)
+      del(.tags.entity)
+      del(.tags.friendly_name)
+
+  filter_swimming_pool_ph:
+    type: 'filter'
+    inputs:
+    - 'prometheus_scrape_homeassistant'
+    condition: '.name=="hass_sensor_unit_ph" && .tags.friendly_name=="ph_iopool_pool"'
+  remap_swimming_pool_ph:
+    type: 'remap'
+    inputs:
+    - 'filter_swimming_pool_ph'
+    source: |-
+      .name = "homeassistant_swimming_pool_ph"
+      del(.tags.domain)
+      del(.tags.entity)
+      del(.tags.friendly_name)
+
+  filter_swimming_pool_temperature:
+    type: 'filter'
+    inputs:
+    - 'prometheus_scrape_homeassistant'
+    condition: '.name=="hass_sensor_temperature_celsius" && .tags.friendly_name=="temperature_iopool_pool"'
+  remap_swimming_pool_temperature:
+    type: 'remap'
+    inputs:
+    - 'filter_swimming_pool_temperature'
+    source: |-
+      .name = "homeassistant_swimming_pool_temperature"
+      del(.tags.domain)
+      del(.tags.entity)
+      del(.tags.friendly_name)
+
+  

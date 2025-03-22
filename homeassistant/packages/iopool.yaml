@@ -1,0 +1,63 @@
+iopool:
+  sensor:
+    - platform: rest
+      unique_id: 4fdd4082-8612-4550-90db-2add2607fdb9
+      name: iopool
+      resource: https://api.iopool.com/v1/pool/4bf73c4a-20b7-4d8f-a5ee-9bf84ed41ebe
+      value_template: "{{ value_json.title }}"
+      json_attributes:
+        - id
+        - latestMeasure
+        - hasAnActionRequired
+        - advice
+        - mode
+      headers:
+        x-api-key: !secret iopool_api_key
+      scan_interval: 300
+      icon: mdi:pool
+
+  template:
+    - sensor:
+        - name: "temperature_iopool_pool"
+          unique_id: dcbbbb0d-d212-4c9a-bc4b-6f49a3075b08
+          state: "{{ state_attr('sensor.iopool', 'latestMeasure')['temperature'] | round(2) }}"
+          device_class: temperature
+          unit_of_measurement: "°C"
+          state_class: measurement
+          icon: mdi:pool-thermometer
+          attributes:
+            source: "{{ state_attr('sensor.iopool', 'latestMeasure')['mode'] }}"
+            isValid: "{{ state_attr('sensor.iopool', 'latestMeasure')['isValid'] }}"
+            measuredAt: "{{ state_attr('sensor.iopool', 'latestMeasure')['measuredAt'] }}"
+        - name: "ph_iopool_pool"
+          unique_id: f4804a67-1224-4507-a4fb-21d983958b7c
+          state: "{{ state_attr('sensor.iopool', 'latestMeasure')['ph'] | round(1) }}"
+          unit_of_measurement: "pH"
+          attributes:
+            source: "{{ state_attr('sensor.iopool', 'latestMeasure')['mode'] }}"
+            isValid: "{{ state_attr('sensor.iopool', 'latestMeasure')['isValid'] }}"
+            measuredAt: "{{ state_attr('sensor.iopool', 'latestMeasure')['measuredAt'] }}"
+        - name: "orp_iopool_pool"
+          unique_id: e0ef9122-c53a-41ae-be72-517f3fcbb443
+          state: "{{ state_attr('sensor.iopool', 'latestMeasure')['orp'] | round(0) }}"
+          unit_of_measurement: "mV"
+          attributes:
+            source: "{{ state_attr('sensor.iopool', 'latestMeasure')['mode'] }}"
+            isValid: "{{ state_attr('sensor.iopool', 'latestMeasure')['isValid'] }}"
+            measuredAt: "{{ state_attr('sensor.iopool', 'latestMeasure')['measuredAt'] }}"
+        - name: "recommanded_filtration_iopool_pool"
+          unique_id: f53659ba-922f-4861-9198-73a7dd43ae6a
+          state: "{{ state_attr('sensor.iopool', 'advice')['filtrationDuration'] * 60 }}"
+          device_class: duration
+          unit_of_measurement: "min"
+          icon: mdi:sun-clock-outline
+        - name: "mode_iopool_pool"
+          unique_id: af6db587-be33-44e7-950c-fa52f0453d1f
+          state: "{{ state_attr('sensor.iopool', 'mode') }}"
+          icon: mdi:auto-mode
+    - binary_sensor:
+        - name: "required_actions_iopool_pool"
+          unique_id: fb6bb7e0-86ad-4f27-90ee-47c39db0ab12
+          state: "{{ state_attr('sensor.iopool', 'hasAnActionRequired') }}"
+          device_class: problem
+          icon: mdi:checkbox-marked-circle-plus-outline

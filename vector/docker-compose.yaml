@@ -1,0 +1,11 @@
+services:
+
+  homeassistant-collector:
+    image: 'timberio/vector:0.45.0-debian'
+    container_name: 'homeassistant-collector'
+    environment:
+      VECTOR_CONFIG_DIR: '/etc/vector/config'
+    volumes:
+    - './configs:/etc/vector/config'
+    ports:
+    - '9598:9598/tcp'
