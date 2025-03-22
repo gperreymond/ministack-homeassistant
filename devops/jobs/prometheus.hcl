@@ -152,7 +152,7 @@ EOF
         tags = [
           "metrics", "monitoring",
           "traefik.enable=true",
-          "traefik.http.routers.prometheus.rule=Host(`prometheus.docker.localhost`)",
+          "traefik.http.routers.prometheus.rule=Host(`prometheus.homeassistant.internal`)",
           "traefik.http.routers.prometheus.entrypoints=web",
           "traefik.http.services.prometheus.loadbalancer.passhostheader=true",
         ]

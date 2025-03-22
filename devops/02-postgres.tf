@@ -34,7 +34,7 @@ resource "null_resource" "postgres" {
   depends_on = [
     // parent
     null_resource.minio,
-    // resources: homeassistant
+    // resources
     random_password.homeassistant_postgres,
     postgresql_role.homeassistant_postgres,
     postgresql_database.homeassistant_postgres,
