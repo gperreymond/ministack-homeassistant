@@ -1,6 +1,40 @@
 groups:
 - name: swimming-pool
   rules:
+  # ORP
+  - alert: SwimmingPoolORPSaturationVeryLow
+    expr: 'homeassistant_swimming_pool_orp <= 550'
+    for: 0m
+    labels:
+      severity: critical
+    annotations:
+      summary: Swimming pool ORP saturation is very low
+      description: Swimming pool ORP saturation very is low
+  - alert: SwimmingPoolORPSaturationLow
+    expr: 'homeassistant_swimming_pool_orp > 550 and homeassistant_swimming_pool_orp < 650'
+    for: 0m
+    labels:
+      severity: warning
+    annotations:
+      summary: Swimming pool ORP saturation is low
+      description: Swimming pool ORP saturation is low
+  - alert: SwimmingPoolORPSaturationHigh
+    expr: 'homeassistant_swimming_pool_orp > 800 and homeassistant_swimming_pool_orp < 1000'
+    for: 0m
+    labels:
+      severity: warning
+    annotations:
+      summary: Swimming pool ORP saturation is high
+      description: Swimming pool ORP saturation is high
+  - alert: SwimmingPoolORPSaturationVeryHigh
+    expr: 'homeassistant_swimming_pool_orp >= 1000'
+    for: 0m
+    labels:
+      severity: critical
+    annotations:
+      summary: Swimming pool ORP saturation is very high
+      description: Swimming pool ORP saturation very is high
+  # PH
   - alert: SwimmingPoolPHSaturationVeryLow
     expr: 'homeassistant_swimming_pool_ph <= 6.8'
     for: 0m
@@ -13,7 +47,7 @@ groups:
     expr: 'homeassistant_swimming_pool_ph > 6.8 and homeassistant_swimming_pool_ph < 7.1'
     for: 0m
     labels:
-      severity: critical
+      severity: warning
     annotations:
       summary: Swimming pool PH saturation is low
       description: Swimming pool PH saturation is low
