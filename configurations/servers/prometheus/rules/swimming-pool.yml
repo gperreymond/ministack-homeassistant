@@ -1,0 +1,19 @@
+groups:
+- name: swimming-pool
+  rules:
+  - alert: SwimmingPoolPHSaturationHigh
+    expr: 'homeassistant_swimming_pool_ph > 7.7 and homeassistant_swimming_pool_ph < 8.1'
+    for: 0m
+    labels:
+      severity: warning
+    annotations:
+      summary: Swimming pool PH saturation is high
+      description: Swimming pool PH saturation is high
+  - alert: SwimmingPoolPHSaturationVeryHigh
+    expr: 'homeassistant_swimming_pool_ph >= 8.1'
+    for: 0m
+    labels:
+      severity: critical
+    annotations:
+      summary: Swimming pool PH saturation is very high
+      description: Swimming pool PH saturation very is high
