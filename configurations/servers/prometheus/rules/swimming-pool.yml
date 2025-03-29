@@ -1,6 +1,39 @@
 groups:
 - name: swimming-pool
   rules:
+  # Temperature
+  - alert: SwimmingPoolTemperatureSaturationVeryLow
+    expr: 'homeassistant_swimming_pool_temperature <= 15'
+    for: 0m
+    labels:
+      severity: critical
+    annotations:
+      summary: Swimming pool Temperature saturation is very low
+      description: Swimming pool Temperature saturation very is low
+  - alert: SwimmingPoolTemperatureSaturationLow
+    expr: 'homeassistant_swimming_pool_temperature > 15 and homeassistant_swimming_pool_temperature < 20.5'
+    for: 0m
+    labels:
+      severity: warning
+    annotations:
+      summary: Swimming pool Temperature saturation is low
+      description: Swimming pool Temperature saturation is low
+  - alert: SwimmingPoolTemperatureSaturationHigh
+    expr: 'homeassistant_swimming_pool_temperature > 29 and homeassistant_swimming_pool_temperature < 32'
+    for: 0m
+    labels:
+      severity: warning
+    annotations:
+      summary: Swimming pool Temperature saturation is high
+      description: Swimming pool Temperature saturation is high
+  - alert: SwimmingPoolTemperatureSaturationVeryHigh
+    expr: 'homeassistant_swimming_pool_temperature >= 32'
+    for: 0m
+    labels:
+      severity: critical
+    annotations:
+      summary: Swimming pool Temperature saturation is very high
+      description: Swimming pool Temperature saturation very is high
   # ORP
   - alert: SwimmingPoolORPSaturationVeryLow
     expr: 'homeassistant_swimming_pool_orp <= 550'
