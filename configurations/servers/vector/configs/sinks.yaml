@@ -8,6 +8,9 @@ sinks:
     - 'remap_swimming_pool_temperature'
     - 'remap_weather_temperature'
     - 'remap_weather_humidity'
+    - 'remap_electricity_consumption_prise_connectee_chambre_hugo_consommation_actuelle'
+    - 'remap_electricity_consumption_prise_connectee_chambre_parents_consommation_actuelle'
+    - 'remap_electricity_consumption_prise_connectee_salon_consommation_actuelle'
     address: '0.0.0.0:9598'
 
   prometheus_remote_write:
@@ -18,6 +21,9 @@ sinks:
     - 'remap_swimming_pool_temperature'
     - 'remap_weather_temperature'
     - 'remap_weather_humidity'
+    - 'remap_electricity_consumption_prise_connectee_chambre_hugo_consommation_actuelle'
+    - 'remap_electricity_consumption_prise_connectee_chambre_parents_consommation_actuelle'
+    - 'remap_electricity_consumption_prise_connectee_salon_consommation_actuelle'
     endpoint: 'http://prometheus.homeassistant.internal/api/v1/write'
 
   console:

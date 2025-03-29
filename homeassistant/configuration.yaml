@@ -18,6 +18,15 @@ template:
       - name: "weather_forecast_temperature"
         unit_of_measurement: "°C"
         state: "{{ state_attr('weather.forecast_maison', 'temperature') }}"
+      - name: "electricity_consumption_prise_connectee_salon_consommation_actuelle"
+        unit_of_measurement: "W"
+        state: "{{ states.sensor.prise_connectee_salon_consommation_actuelle.state }}"
+      - name: "electricity_consumption_prise_connectee_chambre_hugo_consommation_actuelle"
+        unit_of_measurement: "W"
+        state: "{{ states.sensor.prise_connectee_chambre_hugo_consommation_actuelle.state }}"
+      - name: "electricity_consumption_prise_connectee_chambre_parents_consommation_actuelle"
+        unit_of_measurement: "W"
+        state: "{{ states.sensor.prise_connectee_chambre_parents_consommation_actuelle.state }}"
 
 # Loads default set of integrations. Do not remove.
 default_config:

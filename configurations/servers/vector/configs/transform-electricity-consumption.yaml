@@ -1,0 +1,55 @@
+transforms:
+
+  filter_electricity_consumption_prise_connectee_chambre_hugo_consommation_actuelle:
+    type: 'filter'
+    inputs:
+    - 'prometheus_scrape_homeassistant'
+    condition: '.name=="hass_sensor_unit_w" && .tags.friendly_name=="electricity_consumption_prise_connectee_chambre_hugo_consommation_actuelle"'
+  remap_electricity_consumption_prise_connectee_chambre_hugo_consommation_actuelle:
+    type: 'remap'
+    inputs:
+    - 'filter_electricity_consumption_prise_connectee_chambre_hugo_consommation_actuelle'
+    source: |-
+      .name = "homeassistant_electricity_consumption"
+      .tags.sensor="Prise"
+      .tags.type="Tapo P110"
+      .tags.room="Chambre Hugo"
+      del(.tags.domain)
+      del(.tags.entity)
+      del(.tags.friendly_name)
+
+  filter_electricity_consumption_prise_connectee_chambre_parents_consommation_actuelle:
+    type: 'filter'
+    inputs:
+    - 'prometheus_scrape_homeassistant'
+    condition: '.name=="hass_sensor_unit_w" && .tags.friendly_name=="electricity_consumption_prise_connectee_chambre_parents_consommation_actuelle"'
+  remap_electricity_consumption_prise_connectee_chambre_parents_consommation_actuelle:
+    type: 'remap'
+    inputs:
+    - 'filter_electricity_consumption_prise_connectee_chambre_parents_consommation_actuelle'
+    source: |-
+      .name = "homeassistant_electricity_consumption"
+      .tags.sensor="Prise"
+      .tags.type="Tapo P110"
+      .tags.room="Chambre Parents"
+      del(.tags.domain)
+      del(.tags.entity)
+      del(.tags.friendly_name)
+
+  filter_electricity_consumption_prise_connectee_salon_consommation_actuelle:
+    type: 'filter'
+    inputs:
+    - 'prometheus_scrape_homeassistant'
+    condition: '.name=="hass_sensor_unit_w" && .tags.friendly_name=="electricity_consumption_prise_connectee_salon_consommation_actuelle"'
+  remap_electricity_consumption_prise_connectee_salon_consommation_actuelle:
+    type: 'remap'
+    inputs:
+    - 'filter_electricity_consumption_prise_connectee_salon_consommation_actuelle'
+    source: |-
+      .name = "homeassistant_electricity_consumption"
+      .tags.sensor="Prise"
+      .tags.type="Tapo P110"
+      .tags.room="Salon"
+      del(.tags.domain)
+      del(.tags.entity)
+      del(.tags.friendly_name)
