@@ -119,6 +119,18 @@ resource "nomad_job" "thanos_compactor" {
   ]
 }
 
+resource "nomad_job" "vector_homeassistant" {
+  jobspec = templatefile("${path.module}/jobs/vector-homeassistant.hcl", {
+    destination       = "worker-monitoring",
+    vector_docker_tag = "0.45.0-debian"
+  })
+  purge_on_destroy = true
+
+  depends_on = [
+    nomad_job.thanos_compactor,
+  ]
+}
+
 resource "nomad_job" "grafana" {
   jobspec = templatefile("${path.module}/jobs/grafana.hcl", {
     destination        = "worker-monitoring",
@@ -148,6 +160,7 @@ resource "null_resource" "monitoring" {
     nomad_job.thanos_query,
     nomad_job.thanos_query_frontend,
     nomad_job.thanos_compactor,
+    nomad_job.vector_homeassistant,
     nomad_job.grafana,
   ]
 }
