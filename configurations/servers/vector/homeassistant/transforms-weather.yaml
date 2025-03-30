@@ -1,5 +1,20 @@
 transforms:
 
+  filter_weather_wind_speed:
+    type: 'filter'
+    inputs:
+    - 'prometheus_scrape_homeassistant'
+    condition: '.name=="hass_sensor_unit_km_per_h" && .tags.friendly_name=="weather_forecast_wind_speed"'
+  remap_weather_wind_speed:
+    type: 'remap'
+    inputs:
+    - 'filter_weather_wind_speed'
+    source: |-
+      .name = "homeassistant_weather_wind_speed"
+      del(.tags.domain)
+      del(.tags.entity)
+      del(.tags.friendly_name)
+
   filter_weather_temperature:
     type: 'filter'
     inputs:

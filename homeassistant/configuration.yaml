@@ -15,6 +15,9 @@ recorder:
 
 template:
   - sensor:
+      - name: "weather_forecast_wind_speed"
+        unit_of_measurement: "km/h"
+        state: "{{ state_attr('weather.forecast_maison', 'wind_speed') }}"
       - name: "weather_forecast_temperature"
         unit_of_measurement: "°C"
         state: "{{ state_attr('weather.forecast_maison', 'temperature') }}"

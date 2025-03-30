@@ -21,6 +21,7 @@ sinks:
     - 'remap_swimming_pool_temperature'
     - 'remap_weather_temperature'
     - 'remap_weather_humidity'
+    - 'remap_weather_wind_speed'
     - 'remap_electricity_consumption_prise_connectee_chambre_hugo_consommation_actuelle'
     - 'remap_electricity_consumption_prise_connectee_chambre_parents_consommation_actuelle'
     - 'remap_electricity_consumption_prise_connectee_salon_consommation_actuelle'
