@@ -36,7 +36,7 @@ EOF
 
       resources {
         cpu    = 125
-        memory = 64
+        memory = 256
       }
 
       logs {

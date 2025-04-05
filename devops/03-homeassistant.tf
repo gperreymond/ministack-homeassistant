@@ -25,7 +25,7 @@ resource "nomad_variable" "homeassistant_postgres_configuration" {
 resource "nomad_job" "homeassistant" {
   jobspec = templatefile("${path.module}/jobs/homeassistant.hcl", {
     destination              = "worker-homeassistant",
-    homeassistant_docker_tag = "2025.3"
+    homeassistant_docker_tag = "2025.4"
   })
   purge_on_destroy = true
 
