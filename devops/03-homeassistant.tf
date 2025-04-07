@@ -34,6 +34,18 @@ resource "nomad_job" "homeassistant" {
   ]
 }
 
+resource "nomad_job" "epshome" {
+  jobspec = templatefile("${path.module}/jobs/epshome.hcl", {
+    destination              = "worker-homeassistant",
+    homeassistant_docker_tag = "2025.3.3"
+  })
+  purge_on_destroy = true
+
+  depends_on = [
+    nomad_job.homeassistant,
+  ]
+}
+
 resource "null_resource" "homeassistant" {
   depends_on = [
     // parent
@@ -42,5 +54,6 @@ resource "null_resource" "homeassistant" {
     nomad_namespace.homeassistant_system,
     nomad_variable.homeassistant_postgres_configuration,
     nomad_job.homeassistant,
+    nomad_job.epshome,
   ]
 }

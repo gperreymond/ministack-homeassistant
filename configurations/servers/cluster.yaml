@@ -31,6 +31,7 @@ services:
       - name: 'worker-homeassistant'
         docker_volumes:
           - 'homeassistant_config_data'
+          - 'epshome_config_data'
       - name: 'worker-monitoring'
         local_volumes:
           - 'vector/homeassistant:/mnt/vector/homeassistant'
